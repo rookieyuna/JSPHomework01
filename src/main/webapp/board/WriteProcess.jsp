@@ -1,0 +1,56 @@
+<%@page import="model1.board.BoardDAO"%>
+<%@page import="model1.board.BoardDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!-- 글쓰기 처리(insert) 전 로그인 확인 -->
+<%@ include file="IsLoggedIn.jsp" %>
+<%
+//폼값 받기
+String title = request.getParameter("title");
+String content = request.getParameter("content");
+
+//사용자가 입력한 폼값을 저장하기 위해 DTO객체 생성
+BoardDTO dto = new BoardDTO();
+dto.setTitle(title);
+dto.setContent(content);
+//세션영역에 저장된 회원 인증정보(아이디)를 가져와서 DTO에 저장한다.
+dto.setId(session.getAttribute("UserId").toString());
+
+//DAO객체 생성 및 DB연결
+BoardDAO dao = new BoardDAO(application);
+
+/*데이터 한 개씩 입력하는 기존방식*/
+//dto객체를 매개변수로 전달하여 레코드 insert처리
+int iResult = dao.insertWrite(dto);
+
+/*더미데이터 100개를 한번에 입력하기*/
+/* int iResult = 0;
+for(int i=0; i<=100; i++){
+	dto.setTitle(title+ "-" + i);
+	iResult = dao.insertWrite(dto);
+}
+ */
+
+//자원해제
+dao.close();
+
+if(iResult == 1){
+	//글쓰기에 성공시 리스트(목록) 페이지로 이동
+	response.sendRedirect("listT.jsp");
+} else{
+	//실패 시 글쓰기 페이지로 back(즉, 뒤로 이동)
+	JSFunction.alertBack("글쓰기에 실패하였습니다.", out);
+}
+%>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
