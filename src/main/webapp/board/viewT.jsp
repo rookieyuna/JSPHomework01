@@ -101,7 +101,7 @@ function deletePost() {
 						&& session.getAttribute("UserId").toString().equals(dto.getId())){
 					%>
                         <button type="button" class="btn btn-secondary"
-                        	onclick="location.href='Edit.jsp?num=<%=dto.getNum()%>';">수정하기</button>
+                        	onclick="location.href='editT.jsp?num=<%=dto.getNum()%>';">수정하기</button>
                         <button type="button" class="btn btn-danger" onclick="deletePost();">삭제하기</button>
                     <%
 					}

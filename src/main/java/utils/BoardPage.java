@@ -7,7 +7,7 @@ public class BoardPage {
 	public static String pagingStr(int totalCount, int pageSize, int blockPage, 
 			int pageNum, String reqUrl) {
 		
-		String pagingStr ="<ul class=\"pagination justify-content-center\">";
+		String pagingStr ="";
 		//전체 페이지 수 계산
 		int totalPages = (int)(Math.ceil((double)totalCount / pageSize));
 		
@@ -26,7 +26,7 @@ public class BoardPage {
 		int blockCount = 1;
 		while (blockCount <= blockPage && pageTemp <=totalPages) {
 			if(pageTemp == pageNum) {
-				pagingStr += "<li class=\"page-item active\"><a class=\"page-link\">" + pageTemp + "</li>";
+				pagingStr += "<li class=\"page-item active\"><a class=\"page-link\">" + pageTemp + "</a></li>";
 			} else {
 				pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href='" + reqUrl + "?pageNum=" + pageTemp
 							+ "'>" + pageTemp + "</a></li>";
@@ -42,7 +42,6 @@ public class BoardPage {
 			pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href='" + reqUrl 
 						+ "?pageNum=" + totalPages + "'><i class='bi bi-skip-forward-fill'></i></a></li>";
 		}	
-		pagingStr += "</ul>";
 		
 		return pagingStr;
 	}

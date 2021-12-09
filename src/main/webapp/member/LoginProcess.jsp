@@ -34,7 +34,7 @@ else {
 		리퀘스트 영역은 하나의 요청이 완료될때까지 영역을 공유한다.
 		따라서 포워드 된 페이지까지 데이터를 공유할 수 있다.
 	*/
-	request.setAttribute("LoginErrMsg", "로그인 오류입니다.");
+	request.setAttribute("LoginErrMsg", "아이디, 비밀번호를 확인하세요!");
 	//로그인페이지로 포워드(페이지 전달)
 	request.getRequestDispatcher("Login.jsp").forward(request, response);
 }

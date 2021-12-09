@@ -40,7 +40,34 @@ public class MemberDAO extends JDBConnect {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		return dto;
+	}
+	
+	
+	//이름으로 아이디/비번 찾기
+	public MemberDTO getMemberDTO(String uName) {
+		MemberDTO dto = new MemberDTO();
+		//회원로그인을 위한 쿼리문 작성
+		String query = "SELECT * FROM member WHERE name=?";
 		
+		try {
+			psmt = con.prepareStatement(query);
+			//쿼리문에 사용자가 입력한 이름 삽입
+			psmt.setString(1, uName);
+			//쿼리 실행
+			rs = psmt.executeQuery();
+			
+			//회원정보가 존재한다면 DTO객체에 정보를 저장
+			if(rs.next()) {
+				dto.setId(rs.getString("id"));
+				dto.setPass(rs.getString("pass"));
+				dto.setName(rs.getString(3));
+				dto.setRegidate(rs.getString(4));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return dto;
 	}
 }

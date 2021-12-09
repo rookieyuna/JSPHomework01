@@ -139,9 +139,10 @@ dao.close();
             <!-- 페이지 번호 -->
             <div class="row mt-3">
                 <div class="col">
-                	<%= BoardPage.pagingStr(totalCount, pageSize,
-        				blockPage, pageNum, request.getRequestURI()) %>
-                
+                	<ul class="pagination justify-content-center">
+	                	<%= BoardPage.pagingStr(totalCount, pageSize,
+	        				blockPage, pageNum, request.getRequestURI()) %>
+                	</ul>
                     <!-- <ul class="pagination justify-content-center">
                         <li class="page-item"><a class="page-link" href="#">
                             <i class='bi bi-skip-backward-fill'></i>
