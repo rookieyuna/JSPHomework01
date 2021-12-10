@@ -54,6 +54,21 @@
             }
         });
     });
+    
+	function validateForm(form) {
+		var idFind = document.getElementById("idFind");
+		
+		if(!form.user_id.value && idFind.checked==false){
+			alert("아이디를 입력하세요.");
+			form.user_id.focus();
+			return false;
+		}
+		if(form.user_name.value==""){
+			alert("이름을 입력하세요.");
+			form.user_name.focus();
+			return false;
+		}
+	};
     </script>
 </head>
 <body>
@@ -65,7 +80,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;
         <input type="radio" name="find" id="pwFind">비밀번호찾기
     </div>
-    <form action="FindProcess.jsp" method="post">
+    <form action="FindProcess.jsp" method="post" onsubmit="return validateForm(this);">
     <div id="IdBox" class="">
         <table align="center" id="InputTable">
             <colgroup>

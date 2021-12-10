@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <%
 //아이디/비번찾기 폼에서 사용자가 입력한 아이디, 이름 받기
-//String userId = request.getParameter("user_id");
+String userId = request.getParameter("user_id");
 String userName = request.getParameter("user_name");
 //JDBC를 통해 데이터베이스 연결(오라클 접속)
 MemberDAO dao = new MemberDAO();
@@ -15,8 +15,14 @@ MemberDTO memberDTO = dao.getMemberDTO(userName);
 dao.close();
 
 if(memberDTO.getId() != null){
-	//이름으로 아이디 찾았을 경우
-	JSFunction.alertLocation("아이디: "+ memberDTO.getId(), "Login.jsp", out);
+	if(userId==""){
+		//1. 이름으로 아이디 찾기
+		JSFunction.alertLocation("아이디: "+ memberDTO.getId(), "Login.jsp", out);
+	}
+	else{
+		//아이디/이름으로 비번 찾기
+		JSFunction.alertLocation("비밀번호: "+ memberDTO.getPass(), "Login.jsp", out);
+	}
 }
 else {
 	//찾기에 실패한 경우
