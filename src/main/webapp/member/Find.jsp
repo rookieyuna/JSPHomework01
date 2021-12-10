@@ -81,7 +81,7 @@
             <tr id="item02">
                 <th><span class="bullet">&gt;</span><strong>이 름</strong></th>
                 <td>
-                    <input type="text" name="name" style="width:200px;">
+                    <input type="text" name="user_name" style="width:200px;">
                 </td>
             </tr>
             <!-- <tr id="item03">
