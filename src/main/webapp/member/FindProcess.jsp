@@ -10,7 +10,7 @@ String userName = request.getParameter("user_name");
 //JDBC를 통해 데이터베이스 연결(오라클 접속)
 MemberDAO dao = new MemberDAO();
 //받아온 이름을 매개변수로 getMemberDTO()호출. 아이디찾기
-MemberDTO memberDTO = dao.getMemberDTO(userName);
+MemberDTO memberDTO = dao.findMemberDTO(userId, userName);
 //자원반납
 dao.close();
 

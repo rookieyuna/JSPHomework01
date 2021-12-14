@@ -45,17 +45,31 @@ public class MemberDAO extends JDBConnect {
 	
 	
 	//이름으로 아이디/비번 찾기
-	public MemberDTO getMemberDTO(String uName) {
+	public MemberDTO findMemberDTO(String uId, String uName) {
 		MemberDTO dto = new MemberDTO();
 		//회원로그인을 위한 쿼리문 작성
-		String query = "SELECT * FROM member WHERE name=?";
+		String query = "";
 		
 		try {
-			psmt = con.prepareStatement(query);
-			//쿼리문에 사용자가 입력한 이름 삽입
-			psmt.setString(1, uName);
-			//쿼리 실행
-			rs = psmt.executeQuery();
+			if(uId == "") { //이름으로 아이디 찾기
+				query = "SELECT * FROM member WHERE name=?";
+				
+				psmt = con.prepareStatement(query);
+				//쿼리문에 사용자가 입력한 이름 삽입
+				psmt.setString(1, uName);
+				//쿼리 실행
+				rs = psmt.executeQuery();
+			}
+			else { //아이디&이름으로 비번 찾기
+				query = "SELECT * FROM member WHERE id=? and name=?";
+				
+				psmt = con.prepareStatement(query);
+				//쿼리문에 사용자가 입력한 이름 삽입
+				psmt.setString(1, uId);
+				psmt.setString(2, uName);
+				//쿼리 실행
+				rs = psmt.executeQuery();
+			}	
 			
 			//회원정보가 존재한다면 DTO객체에 정보를 저장
 			if(rs.next()) {
